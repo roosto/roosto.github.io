@@ -45,7 +45,7 @@ async function doTheThing(source) {
   var zoomId  = urlBits[urlBits.length - 1];
   if (zoomId.indexOf('?') != -1) {
     var bits = zoomId.split('?');
-    zoomId = zoomId[0]
+    zoomId = bits[0]
   }
 
   putInOutput('The ZoomID is ' + zoomId);
@@ -65,22 +65,22 @@ async function doTheThing(source) {
 		<title>Zoom Links to Dial-able Numbers</title>
 	<head>
 	<body>
-		<h1>Zoom Links to Dial-able Numbers</h1>
 		<div class="container-fluid">
+			<h1>Zoom Links to Dial-able Numbers</h1>
 			<label for='manual-entry'>Put your link here</label>
-			<input type='text' id='manual-entry' size='80' onchange='doTheThing("manual-entry")' />
+			<input type='text' id='manual-entry' size='50' onchange='doTheThing("manual-entry")' />
 
 			<label for='zoom-number'>
 			<select id='zoom-number'>
 				<option id='9292056099' value='9292056099'>+1 929.205.6099</option>
 			</select><br />
-			<button type="button" onclick="doTheThing('clipboard')" class="btn btn-primary btn-lg btn-block">Get from Clipboard</button>
+			<button type="button" onclick="doTheThing('clipboard')" class="btn btn-primary btn-lg">Get from Clipboard</button>
 			<p>Clipboard contents:</p>
-			<textarea cols='120' rows='10' id='cbDisplay'></textarea><br />
+			<textarea style="width: 100%" rows='10' id='cbDisplay'></textarea><br />
 			<p><a id='web-link' href=''></a></p> 
-			<p><a id='dial-in-link' href=''></a></p>
+			<p>☏<a id='dial-in-link' href=''></a></p>
 			<div id='output' />
-			<button type="button" class="btn btn-secondary btn-lg btn-block">Reset</button>
+<!-- 			<button type="button" class="btn btn-secondary btn-lg btn-block">Reset</button> -->
 		</div>
 	</body>
 </html>
