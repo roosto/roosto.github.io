@@ -66,19 +66,21 @@ async function doTheThing(source) {
 	<head>
 	<body>
 		<h1>Zoom Links to Dial-able Numbers</h1>
-		<label for='manual-entry'>Put your link here</label>
-		<input type='text' id='manual-entry' size='80' onchange='doTheThing("manual-entry")' />
+		<div class="container-fluid">
+			<label for='manual-entry'>Put your link here</label>
+			<input type='text' id='manual-entry' size='80' onchange='doTheThing("manual-entry")' />
 
-		<label for='zoom-number'>
-		<select id='zoom-number'>
-			<option id='9292056099' value='9292056099'>+1 929.205.6099</option>
-		</select><br />
-		<button onclick='doTheThing("clipboard")'>Grab from Clipboard</button><br />
-		<hr />
-		<p>Clipboard contents:</p>
-		<textarea cols='120' rows='10' id='cbDisplay'></textarea><br />
-		<p><a id='web-link' href=''></a></p> 
-		<p><a id='dial-in-link' href=''></a></p>
-		<div id='output' />
+			<label for='zoom-number'>
+			<select id='zoom-number'>
+				<option id='9292056099' value='9292056099'>+1 929.205.6099</option>
+			</select><br />
+			<button type="button" onclick="doTheThing('clipboard')" class="btn btn-primary btn-lg btn-block">Get from Clipboard</button>
+			<p>Clipboard contents:</p>
+			<textarea cols='120' rows='10' id='cbDisplay'></textarea><br />
+			<p><a id='web-link' href=''></a></p> 
+			<p><a id='dial-in-link' href=''></a></p>
+			<div id='output' />
+			<button type="button" class="btn btn-secondary btn-lg btn-block">Reset</button>
+		</div>
 	</body>
 </html>
