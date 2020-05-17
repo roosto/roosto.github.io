@@ -2,10 +2,27 @@
 <html>
 	<head>
 		<script type="text/javascript">
-function paste() {
-  navigator.clipboard.readText().then(
-  clipText => document.querySelector("#output").innerText += clipText);
+async function getClipboard() {
+  return navigator.clipboard.readText();
 }
+
+function putInOutput(str) {
+  console.log(str);
+  document.getElementById('output').innerHTML = str;
+}
+
+function getDialInNumber() {
+  return document.getElementById('dial-in').value;
+}
+
+async function doTheThing() {
+  var cbText  = await getClipboard();
+  var urlBits = cbText.split('/');
+  console.log(urlBits);
+  var zoomId  = urlBits[urlBits.length - 1];
+  putInOutput('The ZoomID is ' + zoomId);
+}
+
 		</script>
 		<title>Zoom Links to Dial-able Numbers</title>
 	<head>
@@ -16,7 +33,7 @@ function paste() {
 		<select id='dial-in' name='dial-in'>
 			<option value='9292056099'>1 (929) 205-6099</option>
 		</select><br />
-		<button onclick='paste()'>Grab from Clipboard</button><br />
+		<button onclick='doTheThing()'>Grab from Clipboard</button><br />
 		<div id='output' />
 	</body>
 </html>
