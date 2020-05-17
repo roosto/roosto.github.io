@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 		<script type="text/javascript">
 async function getClipboard() {
   return navigator.clipboard.readText();
@@ -16,11 +20,17 @@ function getDialInNumber() {
 }
 
 function isItZoomLink(str) {
-  return RegExp('^https://.*zoom\\.us/.+/[0-9]+$').test(str);
+  return RegExp('^https://.*zoom\\.us/.+/[0-9]+(\\?pwd=.+)?$').test(str);
 }
 
-async function doTheThing() {
-  var cbText  = await getClipboard();
+async function doTheThing(source) {
+  var cbText = ''
+  if (source === 'clipboard') {
+    cbText = await getClipboard();
+  } else {
+    cbText = document.getElementById(source).value;
+  }
+
   cbText = cbText.trim();
   var cbDisplay = document.getElementById('cbDisplay');
   cbDisplay.value = cbText;
@@ -33,6 +43,11 @@ async function doTheThing() {
   var urlBits = cbText.split('/');
   console.log(urlBits);
   var zoomId  = urlBits[urlBits.length - 1];
+  if (zoomId.indexOf('?') != -1) {
+    var bits = zoomId.split('?');
+    zoomId = zoomId[0]
+  }
+
   putInOutput('The ZoomID is ' + zoomId);
 
   var webLink       = document.getElementById('web-link');
@@ -51,12 +66,14 @@ async function doTheThing() {
 	<head>
 	<body>
 		<h1>Zoom Links to Dial-able Numbers</h1>
+		<label for='manual-entry'>Put your link here</label>
+		<input type='text' id='manual-entry' size='80' onchange='doTheThing("manual-entry")' />
 
 		<label for='zoom-number'>
 		<select id='zoom-number'>
 			<option id='9292056099' value='9292056099'>+1 929.205.6099</option>
 		</select><br />
-		<button onclick='doTheThing()'>Grab from Clipboard</button><br />
+		<button onclick='doTheThing("clipboard")'>Grab from Clipboard</button><br />
 		<hr />
 		<p>Clipboard contents:</p>
 		<textarea cols='120' rows='10' id='cbDisplay'></textarea><br />
