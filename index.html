@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+function paste() {
+  navigator.clipboard.readText().then(
+  clipText => document.querySelector("#output").innerText += clipText);
+}
+		</script>
+		<title>Zoom Links to Dial-able Numbers</title>
+	<head>
+	<body>
+		<h1>Zoom Links to Dial-able Numbers</h1>
+
+		<label for='dial-in'>
+		<select id='dial-in' name='dial-in'>
+			<option value='9292056099'>1 (929) 205-6099</option>
+		</select><br />
+		<button onclick='paste()'>Grab from Clipboard</button><br />
+		<div id='output' />
+	</body>
+</html>
