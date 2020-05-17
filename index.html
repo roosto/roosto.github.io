@@ -15,8 +15,21 @@ function getDialInNumber() {
   return document.getElementById('zoom-number').value;
 }
 
+function isItZoomLink(str) {
+  return RegExp('^https://.*zoom\\.us/.+/[0-9]+$').test(str);
+}
+
 async function doTheThing() {
   var cbText  = await getClipboard();
+  cbText = cbText.trim();
+  var cbDisplay = document.getElementById('cbDisplay');
+  cbDisplay.value = cbText;
+  if ( ! isItZoomLink(cbText) ) {
+    alert('The below text does not look like a Zoom link');
+    cbDisplay.focus();
+    return;
+  }
+  
   var urlBits = cbText.split('/');
   console.log(urlBits);
   var zoomId  = urlBits[urlBits.length - 1];
@@ -45,6 +58,8 @@ async function doTheThing() {
 		</select><br />
 		<button onclick='doTheThing()'>Grab from Clipboard</button><br />
 		<hr />
+		<p>Clipboard contents:</p>
+		<textarea cols='120' rows='10' id='cbDisplay'></textarea><br />
 		<p><a id='web-link' href=''></a></p> 
 		<p><a id='dial-in-link' href=''></a></p>
 		<div id='output' />
