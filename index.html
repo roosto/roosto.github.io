@@ -12,7 +12,7 @@ function putInOutput(str) {
 }
 
 function getDialInNumber() {
-  return document.getElementById('dial-in').value;
+  return document.getElementById('zoom-number').value;
 }
 
 async function doTheThing() {
@@ -21,6 +21,16 @@ async function doTheThing() {
   console.log(urlBits);
   var zoomId  = urlBits[urlBits.length - 1];
   putInOutput('The ZoomID is ' + zoomId);
+
+  var webLink       = document.getElementById('web-link');
+  webLink.href      = cbText;
+  webLink.innerHTML = cbText;
+
+  var zoomNumber        = getDialInNumber();
+  var dialinDisplay     = document.getElementById(zoomNumber).innerHTML + ' ,, ' + zoomNumber;
+  var dialinLink        = document.getElementById('dial-in-link');
+  dialinLink.href       = 'tel:+1' + zoomNumber + ',,' + zoomId + '#';
+  dialinLink.innerHTML = dialinDisplay;
 }
 
 		</script>
@@ -29,11 +39,14 @@ async function doTheThing() {
 	<body>
 		<h1>Zoom Links to Dial-able Numbers</h1>
 
-		<label for='dial-in'>
-		<select id='dial-in' name='dial-in'>
-			<option value='9292056099'>1 (929) 205-6099</option>
+		<label for='zoom-number'>
+		<select id='zoom-number'>
+			<option id='9292056099' value='9292056099'>+1 929.205.6099</option>
 		</select><br />
 		<button onclick='doTheThing()'>Grab from Clipboard</button><br />
+		<hr />
+		<p><a id='web-link' href=''></a></p> 
+		<p><a id='dial-in-link' href=''></a></p>
 		<div id='output' />
 	</body>
 </html>
