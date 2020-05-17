@@ -55,7 +55,7 @@ async function doTheThing(source) {
   webLink.innerHTML = cbText;
 
   var zoomNumber        = getDialInNumber();
-  var dialinDisplay     = document.getElementById(zoomNumber).innerHTML + ' ,, ' + zoomNumber;
+  var dialinDisplay     = document.getElementById(zoomNumber).innerHTML + ' ,, ' + zoomId;
   var dialinLink        = document.getElementById('dial-in-link');
   dialinLink.href       = 'tel:+1' + zoomNumber + ',,' + zoomId + '#';
   dialinLink.innerHTML = dialinDisplay;
